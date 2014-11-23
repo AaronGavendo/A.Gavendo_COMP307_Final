@@ -6,6 +6,7 @@ var objects;
             this.lives = LIVES_NUM;
             this.score = 0;
             this.missed = 0;
+            this.level = 1;
             this.labelString = "";
             this.label = new createjs.Text(this.labelString, GAME_FONT, FONT_COLOUR);
             this.update();
@@ -20,7 +21,12 @@ var objects;
                 this.labelString = "You missed 12! Your village was destroyed";
                 this.label.text = this.labelString;
             } else {
-                this.labelString = "Lives: " + this.lives.toString() + " Kills: " + this.score.toString() + " Missed: " + this.missed.toString();
+                if (this.score >= 25) {
+                    this.level = 2;
+                } else if (this.score >= 50) {
+                    this.level = 3;
+                }
+                this.labelString = "Lives: " + this.lives.toString() + " Kills: " + this.score.toString() + " Missed: " + this.missed.toString() + " Level: " + this.level.toString();
                 this.label.text = this.labelString;
             }
         };
