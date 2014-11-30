@@ -59,11 +59,14 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="images\car.png" />
     <Content Include="images\Grass.png" />
     <Content Include="images\ground.jpg" />
+    <Content Include="images\king_tiger.png" />
     <Content Include="images\Nazi1.png" />
     <Content Include="images\Nazi2.png" />
     <Content Include="images\Nazi3.png" />
+    <Content Include="images\shell.png" />
     <Content Include="images\Tank.png" />
     <Content Include="images\TNT.png" />
     <Content Include="sounds\boom.wav" />
@@ -115,6 +118,7 @@
     <TypeScriptCompile Include="Scripts\objects\grass.ts" />
     <TypeScriptCompile Include="Scripts\objects\nazi.ts" />
     <TypeScriptCompile Include="Scripts\objects\scoreboard.ts" />
+    <TypeScriptCompile Include="Scripts\objects\Shell.ts" />
     <TypeScriptCompile Include="Scripts\objects\tanks.ts" />
     <TypeScriptCompile Include="Scripts\objects\tnt.ts" />
     <TypeScriptCompile Include="Scripts\preloadjs.d.ts" />

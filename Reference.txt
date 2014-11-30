@@ -1,14 +1,23 @@
 Death Sound: 	http://www.freesound.org/people/minian89/sounds/195954/
 
+
 Boom Sound:	http://www.freesound.org/people/Aiwha/sounds/250712/
+
 
 Engine Sound: 	http://www.freesound.org/people/JoniHeinonen/sounds/161894/
 
+
 Tank:	     	http://cdn.scratch.mit.edu/static/site/projects/thumbnails/11/2398.png
 
+
 Nazi:	     	http://www.wolfenstein3d.co.uk/wsjallgemeinepic.gif
+
 Grass:		http://blendernerd.com/wp-content/uploads/2011/04/SoilSand0018_1_S.jpg
 
 
 
-TNT, Grass	Self Made
+
+Bad Tank	http://www.pixeljoint.com/files/icons/king_tiger.gif
+Bad Car		http://th05.deviantart.net/fs71/PRE/i/2013/316/0/2/german_armament_sheet_by_wwii44-d6mzuzt.png
+
+TNT		Self Made

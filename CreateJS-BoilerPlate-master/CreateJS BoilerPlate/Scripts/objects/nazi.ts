@@ -1,13 +1,14 @@
-﻿/// <reference path="../managers/assets.ts" />
-module objects
-{
-    export class Nazi
-    {
+﻿/// <reference path="scoreboard.ts" />
+/// <reference path="../managers/assets.ts" />
+
+module objects {
+    export class Nazi {
         image: createjs.Bitmap;
         dy: number;
         rand: number;
-        scoreboard: objects.Scoreboard;
 
+        level: number = 1;
+        called: number = 0;
 
         constructor() {
 
@@ -16,19 +17,45 @@ module objects
                 this.image = new createjs.Bitmap(managers.Assets.loader.getResult("nazi1"));
             }
             else if (this.rand == 2) {
+
                 this.image = new createjs.Bitmap(managers.Assets.loader.getResult("nazi2"));
+
             }
-            else {
+            else if (this.rand == 3) {
                 this.image = new createjs.Bitmap(managers.Assets.loader.getResult("nazi3"));
             }
             this.image.regX = this.image.getBounds().width * 0.5;
             this.image.regY = this.image.getBounds().height * 0.5;
-            this.reset();
             stage.addChild(this.image);
+            this.reset();
         }
 
+        pickEnemy() {
+
+            //console.log("pickenemy level: " + this.level);
+            //console.log("called: " + this.called);
+            this.called++;
+
+            if (this.level == 2) {
+                stage.removeChild(this.image);
+                this.image = new createjs.Bitmap(managers.Assets.loader.getResult("car"));
+                stage.addChild(this.image);
+            }
+            if (this.level == 3) {
+                stage.removeChild(this.image);
+                this.image = new createjs.Bitmap(managers.Assets.loader.getResult("panzer"));
+                stage.addChild(this.image);
+            }
+
+            this.image.regX = this.image.getBounds().width * 0.5;
+            this.image.regY = this.image.getBounds().height * 0.5;
+            this.reset();
+
+        }
+
+
         reset() {
-            this.dy = Math.floor(Math.random() * 5 + 5); 
+            this.dy = Math.floor(Math.random() * 5 + 5);
 
             this.image.x = 0;
             this.image.y = Math.floor(Math.random() * stage.canvas.height);
@@ -37,9 +64,15 @@ module objects
 
         update() {
             this.image.x += this.dy;
-            if (this.image.x >= (stage.canvas.width + this.image.getBounds().width)) {
+            //console.log(this.image.x, (stage.canvas.width / 2 + this.image.getBounds().width));
+            console.log(stage.canvas.width);
+            if (this.image.x >= (stage.canvas.width)) {
                 this.reset();
+                this.pickEnemy();
+
+
             }
+
         }
     }
 } 

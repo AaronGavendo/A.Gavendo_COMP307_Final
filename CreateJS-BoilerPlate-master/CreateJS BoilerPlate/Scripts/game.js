@@ -2,11 +2,14 @@
 /// <reference path="objects/scoreboard.ts" />
 /// <reference path="objects/tanks.ts" />
 /// <reference path="objects/grass.ts" />
+/// <reference path="objects/shell.ts" />
 /// <reference path="objects/tnt.ts" />
 /// <reference path="objects/nazi.ts" />
 var stage;
 
 var grass;
+
+//var shell: objects.Shell
 var tank;
 var tnt = [];
 var nazis = [];
@@ -15,8 +18,9 @@ var scoreboard;
 var LIVES_NUM = 3;
 var NAZI_NUM = 4;
 var TNT_NUM = 2;
+var CURRENT_LEVEL = 1;
 
-var GAME_FONT = "34px Consolas";
+var GAME_FONT = "20px Consolas";
 var FONT_COLOUR = "#FF0000";
 
 function init() {
@@ -30,15 +34,18 @@ function init() {
 function gameLoop(event) {
     grass.update();
     tank.update();
+
     for (var t = 0; t < TNT_NUM; t++) {
         tnt[t].update();
     }
     for (var n = 0; n < NAZI_NUM; n++) {
+        nazis[n].level = scoreboard.level;
         nazis[n].update();
     }
 
     collision();
     scoreboard.update();
+
     stage.update();
 }
 
@@ -81,16 +88,24 @@ function tankAndNazi() {
         p3.x = 800;
 
         if (distance(p1, p2) < ((tank.image.getBounds().height * 0.5) + (nazis[a].image.getBounds().height * 0.5))) {
-            console.log("Tank:Nazi Collision Run");
-            createjs.Sound.play("death");
+            //createjs.Sound.play("death"); //PUT THIS BACK IN!
             scoreboard.score += 1;
+            if (scoreboard.score >= 10) {
+                scoreboard.level = 2;
+            }
+            if (scoreboard.score >= 20) {
+                scoreboard.level = 3;
+            }
             nazis[a].reset();
+            nazis[a].update();
             stage.update();
-        } else if (p2.x > 799) {
-            console.log("Nazi Missed Collision Run");
-            nazis[a].reset();
+        } else if (p2.x >= 780) {
             scoreboard.missed += 1;
 
+            //This part will update the missed score if the enemy is missed
+            nazis[a].pickEnemy();
+            nazis[a].update();
+            nazis[a].reset();
             stage.update();
         }
     }
@@ -119,7 +134,10 @@ function distance(p1, p2) {
 }
 
 function main() {
+    scoreboard = new objects.Scoreboard();
+
     grass = new objects.Grass();
+
     for (var i = 0; i < NAZI_NUM; i++) {
         nazis[i] = new objects.Nazi();
     }
@@ -127,6 +145,7 @@ function main() {
         tnt[o] = new objects.TNT();
     }
     tank = new objects.Tank();
-    scoreboard = new objects.Scoreboard();
+
+    stage.addChild(scoreboard.label);
 }
 //# sourceMappingURL=game.js.map
