@@ -50,22 +50,18 @@ module objects {
             this.image.regX = this.image.getBounds().width * 0.5;
             this.image.regY = this.image.getBounds().height * 0.5;
             this.reset();
-
         }
-
 
         reset() {
             this.dy = Math.floor(Math.random() * 5 + 5);
 
             this.image.x = 0;
             this.image.y = Math.floor(Math.random() * stage.canvas.height);
-
         }
 
         update() {
             this.image.x += this.dy;
             //console.log(this.image.x, (stage.canvas.width / 2 + this.image.getBounds().width));
-            console.log(stage.canvas.width);
             if (this.image.x >= (stage.canvas.width)) {
                 this.reset();
                 this.pickEnemy();

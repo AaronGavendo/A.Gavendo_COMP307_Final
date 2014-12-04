@@ -5,6 +5,8 @@ module objects
     export class Tank
     {
         image: createjs.Bitmap;
+        public shellFired: boolean;
+        public tankY: number;
 
         constructor()
         {
@@ -19,6 +21,41 @@ module objects
         update()
         {
             this.image.y = stage.mouseY;
+            this.tankY = this.image.y;
+        }
+
+        
+        // Bind key actions to player events
+        private _assignControls() {
+            console.log("Assign Controls");
+            window.onkeydown = this._onControlDown;
+            window.onkeyup = this._onControlUp;
+        }
+
+        // Switch statement to activate movement and rotation
+        private _onControlDown(event: KeyboardEvent) {
+            switch (event.keyCode) {
+                case keys.SPACE:
+                    controls.SHELL = true;
+                    break;
+            }
+        }
+
+        private _onControlUp(event: KeyboardEvent) {
+            switch (event.keyCode) {
+                case keys.SPACE:
+                    controls.SHELL = false;
+                    break;
+            }
+        }
+
+        // Respond to player key presses
+        private _controlAction() {
+
+            //if (controls.SPACE) {
+                
+            //}
+
         }
 
     }

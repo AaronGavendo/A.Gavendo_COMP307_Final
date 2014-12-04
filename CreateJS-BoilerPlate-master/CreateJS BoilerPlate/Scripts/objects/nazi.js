@@ -51,7 +51,6 @@ var objects;
             this.image.x += this.dy;
 
             //console.log(this.image.x, (stage.canvas.width / 2 + this.image.getBounds().width));
-            console.log(stage.canvas.width);
             if (this.image.x >= (stage.canvas.width)) {
                 this.reset();
                 this.pickEnemy();
