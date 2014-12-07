@@ -177,10 +177,46 @@ function shellAndNazi() {
     }
 }
 
+function shellAndTNT() {
+    for (var st = 0; st < SHL_NUM; st++) {
+        for (var a = 0; a < TNT_NUM; a++) {
+            var p1: createjs.Point;
+            var p2: createjs.Point;
+            var p3: createjs.Point;
+
+            p1 = new createjs.Point();
+            p2 = new createjs.Point();
+            p3 = new createjs.Point();
+
+            p1.x = shell[st].image.x;
+            p1.y = shell[st].image.y;
+            p2.x = tnt[a].image.x;
+            p2.y = tnt[a].image.y;
+            p3.x = 800;
+
+
+            if (distance(p1, p2) < ((shell[st].image.getBounds().height * 0.5) + (tnt[a].image.getBounds().height * 0.5))) {
+                createjs.Sound.play("boom"); 
+                tnt[a].reset();
+                stage.removeChild(shell[st]);
+                tnt[a].update();
+                stage.update();
+
+            }
+            else if (p2.x >= 780) {
+                tnt[a].update();
+                tnt[a].reset();
+                stage.update();
+            }
+        }
+    }
+}
+
 function collision() {
     tankAndTNT();
     tankAndNazi();
     shellAndNazi();
+    shellAndTNT();
 }
 
 //Distance between two points //From Teacher Example
