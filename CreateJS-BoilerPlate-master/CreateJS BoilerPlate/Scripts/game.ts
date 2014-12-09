@@ -17,8 +17,8 @@ var nazis = [];
 var scoreboard: objects.Scoreboard;
 
 var LIVES_NUM = 3;
-var NAZI_NUM = 4;
-var TNT_NUM = 2;
+var NAZI_NUM = 2;
+var TNT_NUM = 0;
 var SHL_NUM = 1;
 var CURRENT_LEVEL = 1;
 var TANK_POS = 5;
@@ -39,7 +39,6 @@ function gameLoop(event): void {
     grass.update();
     tank.update();
     TANK_POS = tank.tankY;
-    console.log("Tank Pos In Game", TANK_POS);
     for (var t = 0; t < TNT_NUM; t++) {
         tnt[t].update();
     }
@@ -55,12 +54,10 @@ function gameLoop(event): void {
     scoreboard.update();
 
     stage.update();
-
 }
 
 
-function tankAndTNT()
-{
+function tankAndTNT(){
     for (var a = 0; a < TNT_NUM; a++) {
         var p1: createjs.Point;
         var p2: createjs.Point;
@@ -78,10 +75,8 @@ function tankAndTNT()
             scoreboard.lives -= 1;
             tnt[a].reset();
             stage.update();
-
         }
     }
-
 }
 
 function tankAndNazi() {
@@ -103,16 +98,7 @@ function tankAndNazi() {
 
         if (distance(p1, p2) < ((tank.image.getBounds().height * 0.5) + (nazis[a].image.getBounds().height * 0.5)))
         {
-            //createjs.Sound.play("death"); //PUT THIS BACK IN!
-            scoreboard.score += 1;
-            if (scoreboard.score >= 10)
-            {
-                scoreboard.level = 2;
-            }
-            if (scoreboard.score >= 20)
-            {
-                scoreboard.level = 3;
-            }
+            naziDies();
             nazis[a].reset();
             nazis[a].update();
             stage.update();
@@ -148,22 +134,13 @@ function shellAndNazi() {
             p3.x = 800;
 
 
-            if (distance(p1, p2) < ((shell[sn].image.getBounds().height * 0.5) + (nazis[a].image.getBounds().height * 0.5))) {
-                //createjs.Sound.play("death"); //PUT THIS BACK IN!
-                scoreboard.score += 1;
-                if (scoreboard.score >= 10) {
-                    scoreboard.level = 2;
-                }
-                if (scoreboard.score >= 20) {
-                    scoreboard.level = 3;
-                }
+            if (distance(p1, p2) < ((shell[sn].image.getBounds().height * 0.5) + (nazis[a].image.getBounds().height * 0.5)))
+            {
+                naziDies();
                 nazis[a].reset();
                 stage.removeChild(shell[sn]);
-                //shell[sn].destroy();
                 nazis[a].update();
-                //shell[sn].updatePosition(TANK_POS);
                 stage.update();
-
             }
             else if (p2.x >= 780) {
                 scoreboard.missed += 1;
@@ -209,6 +186,17 @@ function shellAndTNT() {
                 stage.update();
             }
         }
+    }
+}
+
+function naziDies() {
+    //createjs.Sound.play("death"); //PUT THIS BACK IN!
+    scoreboard.score += 1;
+    if (scoreboard.score >= 10) {
+        scoreboard.level = 2;
+    }
+    if (scoreboard.score >= 20) {
+        scoreboard.level = 3;
     }
 }
 

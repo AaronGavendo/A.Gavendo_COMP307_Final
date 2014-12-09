@@ -30,8 +30,8 @@ module objects {
             this.reset();
         }
 
-        pickEnemy() {
-
+        pickEnemy()
+        {
             //console.log("pickenemy level: " + this.level);
             //console.log("called: " + this.called);
             this.called++;
