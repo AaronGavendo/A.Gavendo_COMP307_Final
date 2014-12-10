@@ -7,6 +7,8 @@ Boom Sound:	http://www.freesound.org/people/Aiwha/sounds/250712/
 Engine Sound: 	http://www.freesound.org/people/JoniHeinonen/sounds/161894/
 
 
+Sound Track:	'Tower' as heard in Sega's Phantasy Star (1987)
+
 Tank:	     	http://cdn.scratch.mit.edu/static/site/projects/thumbnails/11/2398.png
 
 

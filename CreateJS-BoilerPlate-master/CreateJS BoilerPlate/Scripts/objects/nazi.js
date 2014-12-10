@@ -5,7 +5,6 @@ var objects;
     var Nazi = (function () {
         function Nazi() {
             this.level = 1;
-            this.called = 0;
             this.rand = Math.floor((Math.random() * 3) + 1);
             if (this.rand == 1) {
                 this.image = new createjs.Bitmap(managers.Assets.loader.getResult("nazi1"));
@@ -20,16 +19,41 @@ var objects;
             this.reset();
         }
         Nazi.prototype.pickEnemy = function () {
-            //console.log("pickenemy level: " + this.level);
-            //console.log("called: " + this.called);
-            this.called++;
-
             if (this.level == 2) {
+                stage.removeChild(this.image);
+                this.rand = Math.floor((Math.random() * 3) + 1);
+                if (this.rand == 1) {
+                    this.image = new createjs.Bitmap(managers.Assets.loader.getResult("nazi1"));
+                } else if (this.rand == 2) {
+                    this.image = new createjs.Bitmap(managers.Assets.loader.getResult("nazi2"));
+                } else if (this.rand == 3) {
+                    this.image = new createjs.Bitmap(managers.Assets.loader.getResult("nazi3"));
+                }
+                stage.addChild(this.image);
+            }
+            if (this.level == 3) {
+                stage.removeChild(this.image);
+                this.rand = Math.floor((Math.random() * 3) + 1);
+                if (this.rand == 1) {
+                    this.image = new createjs.Bitmap(managers.Assets.loader.getResult("nazi1"));
+                } else if (this.rand == 2) {
+                    this.image = new createjs.Bitmap(managers.Assets.loader.getResult("nazi2"));
+                } else if (this.rand == 3) {
+                    this.image = new createjs.Bitmap(managers.Assets.loader.getResult("nazi3"));
+                }
+                stage.addChild(this.image);
+            }
+            if (this.level == 4) {
                 stage.removeChild(this.image);
                 this.image = new createjs.Bitmap(managers.Assets.loader.getResult("car"));
                 stage.addChild(this.image);
             }
-            if (this.level == 3) {
+            if (this.level == 5) {
+                stage.removeChild(this.image);
+                this.image = new createjs.Bitmap(managers.Assets.loader.getResult("car"));
+                stage.addChild(this.image);
+            }
+            if (this.level == 6) {
                 stage.removeChild(this.image);
                 this.image = new createjs.Bitmap(managers.Assets.loader.getResult("panzer"));
                 stage.addChild(this.image);

@@ -17,13 +17,14 @@ var nazis = [];
 var scoreboard: objects.Scoreboard;
 
 var LIVES_NUM = 3;
-var NAZI_NUM = 2;
+var NAZI_NUM = 0;
 var TNT_NUM = 0;
 var SHL_NUM = 1;
 var CURRENT_LEVEL = 1;
 var TANK_POS = 5;
+var SHOULD_CREATE = true;
 
-var GAME_FONT = "20px Consolas";
+var GAME_FONT = "24px Consolas";
 var FONT_COLOUR = "#FF0000";
 
 function init(): void {
@@ -35,7 +36,52 @@ function init(): void {
 }
 
 function gameLoop(event): void {
-
+    console.log(nazis);
+    //scoreboard.update();
+    if (SHOULD_CREATE) {
+        if (scoreboard.level === 1) {
+            console.log("hello", scoreboard.level);
+            NAZI_NUM = 2;
+            nazis.push(new objects.Nazi());
+            nazis.push(new objects.Nazi());
+            SHOULD_CREATE = false;
+        }
+        else if (scoreboard.level === 2) {
+            console.log("hello", scoreboard.level);
+            NAZI_NUM = 3;
+            nazis.push(new objects.Nazi());
+            SHOULD_CREATE = false;
+        }
+        else if (scoreboard.level === 3) {
+            NAZI_NUM = 3;
+            TNT_NUM = 1;
+            tnt.push(new objects.TNT());
+            SHOULD_CREATE = false;
+        }
+        else if (scoreboard.level === 4) {
+            console.log("hello", scoreboard.level);
+            NAZI_NUM = 4;
+            nazis.push(new objects.Nazi());
+            TNT_NUM = 1;
+            SHOULD_CREATE = false;
+        }
+        else if (scoreboard.level === 5) {
+            console.log("hello", scoreboard.level);
+            NAZI_NUM = 4;
+            TNT_NUM = 2;
+            tnt.push(new objects.TNT());
+            SHOULD_CREATE = false;
+        }
+        else if (scoreboard.level === 6) {
+            console.log("hello", scoreboard.level);
+            NAZI_NUM = 5;
+            nazis.push(new objects.Nazi());
+            TNT_NUM = 3;
+            tnt.push(new objects.TNT());
+            SHOULD_CREATE = false;
+        }
+    }
+    
     grass.update();
     tank.update();
     TANK_POS = tank.tankY;
@@ -55,8 +101,6 @@ function gameLoop(event): void {
 
     stage.update();
 }
-
-
 function tankAndTNT(){
     for (var a = 0; a < TNT_NUM; a++) {
         var p1: createjs.Point;
@@ -190,13 +234,26 @@ function shellAndTNT() {
 }
 
 function naziDies() {
-    //createjs.Sound.play("death"); //PUT THIS BACK IN!
+    var oldValue = scoreboard.level;
+    createjs.Sound.play("death"); //PUT THIS BACK IN!
     scoreboard.score += 1;
-    if (scoreboard.score >= 10) {
+    if (scoreboard.score >= 15) {
         scoreboard.level = 2;
     }
-    if (scoreboard.score >= 20) {
+    if (scoreboard.score >= 30) {
         scoreboard.level = 3;
+    }
+    if (scoreboard.score >= 45) {
+        scoreboard.level = 4;
+    }
+    if (scoreboard.score >= 60) {
+        scoreboard.level = 5;
+    }
+    if (scoreboard.score >= 75) {
+        scoreboard.level = 6;
+    }
+    if (scoreboard.level !== oldValue) {
+        SHOULD_CREATE = true;
     }
 }
 
@@ -229,12 +286,12 @@ function main(): void
     scoreboard = new objects.Scoreboard();
 
     grass = new objects.Grass();
-    for (var i = 0; i < NAZI_NUM; i++) {
-        nazis[i] = new objects.Nazi();
-    }
-    for (var o = 0; o < TNT_NUM; o++) {
-        tnt[o] = new objects.TNT();
-    }
+    //for (var i = 0; i < NAZI_NUM; i++) {
+        //nazis[i] = new objects.Nazi();
+    //}
+    //for (var o = 0; o < TNT_NUM; o++) {
+       // tnt[o] = new objects.TNT();
+   // }
     for (var s2 = 0; s2 < SHL_NUM; s2++) {
         shell[s2] = new objects.Shell();
     }

@@ -16,6 +16,7 @@
                 { id: "shell", src: "images/shell.png" },
                 { id: "boom", src: "sounds/boom.wav" },
                 { id: "engine", src: "sounds/engine.wav" },
+                { id: "soundtrack", src: "sounds/soundtrack.mp3" },
                 { id: "death", src: "sounds/death.mp3" }
             ];
 
